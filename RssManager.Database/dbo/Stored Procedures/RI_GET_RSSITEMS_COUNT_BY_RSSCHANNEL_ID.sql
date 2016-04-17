@@ -1,0 +1,8 @@
+﻿CREATE PROCEDURE [dbo].[RI_GET_RSSITEMS_COUNT_BY_RSSCHANNEL_ID]
+	@channel_id bigint = 0
+AS
+BEGIN
+	SELECT	COUNT([dbo].[RSSITEM].[ID])
+	FROM	[dbo].[RSSITEM]
+	WHERE	[dbo].[RSSITEM].[CHANNEL_ID]=@channel_id;
+END

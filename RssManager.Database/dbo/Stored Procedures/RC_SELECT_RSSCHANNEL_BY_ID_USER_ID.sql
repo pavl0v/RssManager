@@ -1,0 +1,19 @@
+﻿CREATE PROCEDURE [dbo].[RC_SELECT_RSSCHANNEL_BY_ID_USER_ID]
+	@channel_id bigint = 0,
+	@user_id bigint = 0
+AS
+BEGIN
+	SELECT 
+		 [dbo].[RSSCHANNEL].[ID]
+		,[dbo].[RSSCHANNEL].[COPYRIGHT]
+		,[dbo].[RSSCHANNEL].[DESCRIPTION]
+		,[dbo].[RSSCHANNEL].[LANGUAGE]
+		,[dbo].[RSSCHANNEL_BY_USER].[NAME]
+		,[dbo].[RSSCHANNEL].[TITLE]
+		,[dbo].[RSSCHANNEL].[URL]
+	FROM
+		[dbo].[RSSCHANNEL] INNER JOIN [dbo].[RSSCHANNEL_BY_USER]
+		ON [dbo].[RSSCHANNEL].[ID]=[dbo].[RSSCHANNEL_BY_USER].[CHANNEL_ID]
+	WHERE 
+		[dbo].[RSSCHANNEL].[ID]=@channel_id AND [dbo].[RSSCHANNEL_BY_USER].[USER_ID]=@user_id;
+END

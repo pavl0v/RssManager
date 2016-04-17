@@ -1,0 +1,38 @@
+﻿<div class="center-div">
+    <!--<div style="text-align:center;">-->
+        <div style="width:400px;padding:0px 20px;margin: 0 auto;" layout="row">
+            <img src="Images/rss-icon.png" style="height:60px;width:60px;" />
+            <div style="margin: 0 20px;">
+                <span style="color:#fb8c00;font:bold 20px arial;">
+                    STAY UP-TO-DATE
+                    <br />
+                    <span style="font: italic 20px arial;">LIVE</span><span style="font:italic 14px arial;"> powered by SignalR</span>
+                </span>
+            </div>
+        </div>
+        <form style="width:400px;margin:0 auto;" name="loginForm" ng-submit="login(model)">
+            <div style="padding:0px 20px;text-align:left;">
+                <md-input-container class="md-block">
+                    <label style="max-width:350px;">Name</label>
+                    <input name="Username" ng-model="model.Username">
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label style="max-width:350px;">Password</label>
+                    <input name="Password" ng-model="model.Password" type="password">
+                </md-input-container>
+            </div>
+            <div layout="row" layout-align="center center">
+                <md-button type="submit">Log In</md-button>
+                <md-button ng-click="showDialogSignUp($event)">Sign Up</md-button>
+            </div>
+        </form>
+        <div ng-hide="false" style="font:normal 10px arial; text-align:left; margin:100px 0; color: gray;">
+            <div style="text-align:center;margin-bottom:10px;">This SPA project is dedicated to my 'unemployment'. The following tech stack was applied:</div>
+            <div><b>Front-end:</b> HTML, CSS, JavaScript, AngularJS v1.5.x, Angular Material, jQuery, SignalR</div>
+            <div><b>Back-end:</b> ASP.NET Web API, C#, OWIN, token-based authentication/authorization, Ninject, SignalR, ADO.NET, log4net</div>
+            <div><b>Database:</b> MS SQL Server, T-SQL, stored procedures</div>
+        </div>
+    <!--</div>-->
+</div>
+
+

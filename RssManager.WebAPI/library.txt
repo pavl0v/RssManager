@@ -1,0 +1,7 @@
+﻿http://bitoftech.net/2014/06/01/token-based-authentication-asp-net-web-api-2-owin-asp-net-identity/
+http://stackoverflow.com/questions/21255203/angularjs-clientside-routing-and-token-authentication-with-webapi
+https://github.com/filipw/apress-recipes-webapi
+http://www.strathweb.com/2012/05/using-ninject-with-the-latest-asp-net-web-api-source/
+http://www.asp.net/signalr/overview/getting-started/tutorial-getting-started-with-signalr
+http://dontcodetired.com/blog/post/Using-Server-Side-Timers-and-SignalR-in-ASPNET-MVC-Applications.aspx
+http://www.codeproject.com/Articles/425150/Beginners-guide-to-a-secure-way-of-storing-passwor

@@ -1,0 +1,39 @@
+﻿<md-dialog aria-label="RSS Channel" ng-cloak>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>{{args.dialogHeader}}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="Images/Icons/Material/close-button.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <md-content>
+            <form style="width:700px;" name="channelForm">
+                <div style="padding:0px 20px;">
+                    <md-input-container class="md-block">
+                        <label style="max-width:500px;">Name</label>
+                        <input required name="channelName" ng-model="args.channel.Name">
+                        <div ng-messages="channelForm.channelName.$error">
+                            <div ng-message="required">This is required.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label style="max-width:500px;">Url</label>
+                        <input required name="channelUrl" ng-model="args.channel.Url" ng-disabled="args.isDisabledURL">
+                        <div ng-messages="channelForm.channelUrl.$error">
+                            <div ng-message="required">This is required.</div>
+                        </div>
+                    </md-input-container>      
+                </div>
+            </form>     
+        </md-content>   
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <md-button ng-click="answer(args.channel)" ng-disabled="args.isDisabledOK">OK</md-button>
+        <md-button ng-click="answer('cancel')" style="margin-right:20px;">CANCEL</md-button>
+    </md-dialog-actions>
+</md-dialog>
+
+

@@ -1,0 +1,7 @@
+﻿<div>
+    <span ng-repeat="p in pages">
+        <span ng-if="p.pageno != currentPageNo" ng-click="pageNo_click(p.channelid, p.pageno)" style="cursor: pointer;">{{p.pageno}}</span>
+        <span ng-if="p.pageno == currentPageNo" style="color:red;">{{p.pageno}}</span>
+        &nbsp;
+    </span>
+</div>

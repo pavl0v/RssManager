@@ -1,0 +1,28 @@
+﻿<md-fab-speed-dial md-open="fab.isOpen" md-direction="{{fab.selectedDirection}}" ng-class="fab.selectedMode" ng-cloak class="fabSpeedDialdemoBasicUsage" style="position:fixed;top:80px; right:30px;">
+    <md-fab-trigger>
+        <md-button aria-label="menu" class="md-fab md-warn">
+            <md-icon md-svg-src="Images/Icons/Material/ellipsis.svg"></md-icon>
+        </md-button>
+    </md-fab-trigger>
+    <md-fab-actions>
+        <md-button aria-label="Refresh" class="md-fab md-raised md-mini" ng-click="updateChannel()">
+            <md-icon md-svg-src="Images/Icons/Material/refresh-button.svg" aria-label="Refresh"></md-icon>
+        </md-button>
+        <md-button aria-label="Read All" class="md-fab md-raised md-mini" ng-click="readAll()">
+            <md-icon md-svg-src="Images/Icons/Material/bookmark-button.svg" aria-label="Read All"></md-icon>
+        </md-button>
+        <md-button aria-label="Modify Channel" class="md-fab md-raised md-mini" ng-click="modifyChannel()">
+            <md-icon md-svg-src="Images/Icons/Material/round-info-button.svg" aria-label="Modify Channel"></md-icon>
+        </md-button>
+    </md-fab-actions>
+</md-fab-speed-dial>
+<md-list md-theme="cyan">
+    <md-list-item class="md-3-line md-long-text" data-ng-repeat="i in items">
+        <img data-ng-src="Images/item-read-state-{{i.ReadState}}.png" data-ng-click="click(i)" class="md-avatar" alt="alt" />
+        <div class="md-list-item-text">
+            <h3>[{{i.PubDateTimeFormatted}}] {{i.RssTitle}}</h3>
+            <p>{{i.RssDescription}}</p>
+        </div>
+    </md-list-item>
+</md-list>
+

@@ -1,0 +1,23 @@
+﻿<div layout="column"  layout-fill>
+    <div id="header" style="height:80px;">
+        <md-toolbar layout="row" layout-align="start center" ng-controller="controllerMainMenu">
+            <rss-main-menu></rss-main-menu>
+        </md-toolbar>
+    </div>
+    <div layout="row" style="padding: 10px;" flex>
+        <div data-ng-controller="controllerRssChannels" layout="column">
+            <md-sidenav md-is-locked-open="true" class="md-whiteframe-3dp" flex>
+                <rss-channels></rss-channels>
+            </md-sidenav>
+        </div>
+        <div data-ng-controller="controllerRssItems" style="padding: 0px 0px 0px 4px;" flex layout="column">
+            <md-content id="itemscontainer" flex>
+                <rss-items></rss-items>
+                <div id="itemsendoflist" style="height:6px;"></div>
+            </md-content>
+        </div>
+    </div>
+    <div id="footer" flex="10" style="text-align:center; vertical-align:middle;">
+        <p id="pfooter">footer</p>
+    </div>
+</div>

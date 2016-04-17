@@ -1,0 +1,17 @@
+﻿CREATE PROCEDURE [dbo].[RC_SELECT_RSSCHANNEL_BY_ID]
+	@id bigint = 0
+AS
+BEGIN
+	SELECT 
+		 [dbo].[RSSCHANNEL].[ID]
+		,[dbo].[RSSCHANNEL].[COPYRIGHT]
+		,[dbo].[RSSCHANNEL].[DESCRIPTION]
+		,[dbo].[RSSCHANNEL].[LANGUAGE]
+		,'' AS 'NAME'
+		,[dbo].[RSSCHANNEL].[TITLE]
+		,[dbo].[RSSCHANNEL].[URL]
+	FROM
+		[dbo].[RSSCHANNEL]
+	WHERE 
+		[ID]=@id;
+END

@@ -1,0 +1,119 @@
+﻿
+<!DOCTYPE html>
+
+<html data-ng-app="app" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=10,chrome=1" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <title>RSS Manager</title>
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .center-div
+        {
+          position: absolute;
+          margin: auto;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          width: 600px;
+          height: 400px;
+          /*background-color: #ccc;
+          border-radius: 3px;*/
+        }
+
+        .about-div {
+          position: absolute;
+          margin: auto;
+          /*top: 0;*/
+          right: 0;
+          left: 0;
+          bottom: 100px;
+          width: 400px;
+          /*height: 400px;*/
+        }
+
+        .fabSpeedDialdemoBasicUsage .text-capitalize {
+            text-transform: capitalize;
+        }
+
+        .fabSpeedDialdemoBasicUsage .md-fab:hover, .fabSpeedDialdemoBasicUsage .md-fab.md-focused {
+            background-color: #2196f3 !important;
+        }
+
+        .fabSpeedDialdemoBasicUsage p.note {
+            font-size: 1.2rem;
+        }
+
+        .fabSpeedDialdemoBasicUsage .lock-size {
+            min-width: 300px;
+            min-height: 300px;
+            width: 300px;
+            height: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /*md-fab-toolbar.md-right md-fab-trigger.align-with-text {
+        left: 7px; }*/
+
+
+
+        .inputErrorsApp {
+            min-height: 48px;
+        }
+
+        md-input-container > p {
+            font-size: 0.8em;
+            text-align: left;
+            width: 100%;
+        }
+    </style>
+
+    <link href="Scripts/angularjs/angular-material.min.css" rel="stylesheet" />
+
+    <script src="Scripts/jquery/jquery-1.12.0.min.js"></script>
+
+    <!--<script src="Scripts/angularjs/angular.min.js"></script>-->
+    <script src="Scripts/angularjs/angular.js"></script>
+    <script src="Scripts/angularjs/angular-route.min.js"></script>
+    <script src="Scripts/angularjs/angular-animate.min.js"></script>
+    <script src="Scripts/angularjs/angular-aria.min.js"></script>
+    <script src="Scripts/angularjs/angular-material.min.js"></script>
+    <script src="Scripts/angularjs/angular-messages.min.js"></script>
+
+    <!--<link href="angular-ui/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="angular-ui/ui-bootstrap-tpls-1.2.4.min.js"></script>-->
+    <!--<script src="angular-ui/src/paging/paging.js"></script>-->
+    <!--<script src="angular-ui/src/pagination/pagination.js"></script>-->
+    <!--<script src="Scripts/app/controller-dialog.js"></script>-->
+
+    <script src="Scripts/app/module-auth-interceptor.js"></script>
+    <script src="Scripts/app/module-directives.js"></script>
+    <script src="Scripts/app/module-dialogs.js"></script>
+    <script src="Scripts/app/module-common.js"></script>
+    <script src="Scripts/app/module-api-rss-items.js"></script>
+    <script src="Scripts/app/module-api-rss-channels.js"></script>
+    <script src="Scripts/app/module-api-users.js"></script>
+
+    <script src="Scripts/app/app.js"></script>
+    <script src="Scripts/app/controller-login.js"></script>
+    <script src="Scripts/app/controller-main-menu.js"></script>
+    <script src="Scripts/app/controller-rss-items.js"></script>
+    <script src="Scripts/app/controller-rss-channels.js"></script>
+
+    <script src="Scripts/jquery.signalR-2.2.0.min.js"></script>
+</head>
+<body data-ng-controller="appctrl">
+    <div data-ng-view="" style="height:100%; max-height:100%;"></div>
+</body>
+</html>

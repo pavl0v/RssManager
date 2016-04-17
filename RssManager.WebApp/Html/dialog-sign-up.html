@@ -1,0 +1,52 @@
+﻿<md-dialog aria-label="dialogForm" ng-cloak>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>{{args.dialogHeader}}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="Images/Icons/Material/close-button.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <md-content>
+            <form style="width:300px;" name="dialogForm">
+                <div style="padding:0px 20px;">
+                    <md-input-container class="md-block">
+                        <label style="max-width:250px;">First Name</label>
+                        <input required name="FirstName" ng-model="args.usr.FirstName">
+                        <div ng-messages="dialogForm.FirstName.$error" >
+                            <div ng-message="required">This is required.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label style="max-width:250px;">Last Name</label>
+                        <input required name="LastName" ng-model="args.usr.LastName">
+                        <div ng-messages="dialogForm.LastName.$error">
+                            <div ng-message="required">This is required.</div>
+                        </div>
+                    </md-input-container>   
+                    <md-input-container class="md-block">
+                        <label style="max-width:250px;">Username</label>
+                        <input required name="Username" ng-model="args.usr.Username">
+                        <div ng-messages="dialogForm.Username.$error">
+                            <div ng-message="required">This is required.</div>
+                        </div>
+                    </md-input-container>     
+                    <md-input-container class="md-block">
+                        <label style="max-width:250px;">Password</label>
+                        <input required name="Password" ng-model="args.usr.Password" type="password">
+                        <div ng-messages="dialogForm.Password.$error">
+                            <div ng-message="required">This is required.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+            </form>
+            <rss-captcha x="" invalid="args.isCaptchaInvalid"></rss-captcha>
+        </md-content>   
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <md-button ng-click="answer(args.usr)" ng-disabled="args.isCaptchaInvalid">OK</md-button>
+        <md-button ng-click="answer('cancel')" style="margin-right:20px;">CANCEL</md-button>
+    </md-dialog-actions>
+</md-dialog>

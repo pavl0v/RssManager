@@ -1,0 +1,11 @@
+﻿<form  name="captchaForm">
+    <div style="padding:0px 20px;">
+        <md-input-container class="md-block">
+            <label style="max-width:150px;">{{a}} + X = {{s}}, X = ?</label>
+            <input required name="X" ng-model="x">
+            <div ng-messages="captchaForm.X.$error">
+                <div ng-message="required">This is required.</div>
+            </div>
+        </md-input-container> 
+    </div>
+</form>

@@ -1,0 +1,24 @@
+﻿<md-menu md-position-mode="target-right target">
+    <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+        <md-icon md-menu-origin md-svg-icon="Images/Icons/Material/menu-button.svg"></md-icon>
+    </md-button>
+    <md-menu-content width="4">
+        <md-menu-item>
+            <md-button ng-click="showDialogAddChannel($event)">
+                <div layout="row" flex>
+                    <p flex>Add Channel</p>
+                    <md-icon md-menu-align-target  md-svg-icon="Images/Icons/Material/menu-button.svg" style="margin: auto 3px auto 0;"></md-icon>
+                </div>
+            </md-button>
+        </md-menu-item>
+        <md-divider></md-divider>
+        <md-menu-item>
+            <md-button ng-click="logout()">
+                <div layout="row" flex>
+                    <p flex>Log Out</p>
+                    <md-icon md-menu-align-target md-svg-icon="Images/Icons/Material/menu-button.svg" style="margin: auto 3px auto 0;"></md-icon>
+                </div>
+            </md-button>
+        </md-menu-item>
+    </md-menu-content>
+</md-menu>
