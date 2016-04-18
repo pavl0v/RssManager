@@ -35,6 +35,7 @@ namespace RssManager.Repository.ADO
         public const string CN_USER_NAME = "USER_NAME";
         public const string CN_PASSWORD = "PASSWORD";
         public const string CN_RSSCHANNEL_NAME = "RSSCHANNEL_NAME";
+        public const string CN_AUTOREFRESH = "AUTOREFRESH";
 
         #endregion
 

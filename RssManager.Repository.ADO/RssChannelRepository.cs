@@ -376,6 +376,7 @@ namespace RssManager.Repository.ADO
         {
             RssChannelDTO dto = new RssChannelDTO();
 
+            dto.Autorefresh = Convert.ToBoolean(reader[Common.CN_AUTOREFRESH]);
             dto.RssCopyright = Convert.ToString(reader[Common.CN_COPYRIGHT]);
             dto.RssDescription = Convert.ToString(reader[Common.CN_DESCRIPTION]);
             dto.Id = Convert.ToInt64(reader[Common.CN_ID]);

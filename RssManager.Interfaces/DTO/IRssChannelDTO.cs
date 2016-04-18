@@ -27,9 +27,8 @@ namespace RssManager.Interfaces.DTO
         string RssTitle { get; set; }
         string RssTtl { get; set; }
         string RssWebMaster { get; set; }
-        //long Id { get; set; }
-        //long UserId { get; set; }
         string Name { get; set; }
         string Url { get; set; }
+        bool Autorefresh { get; set; }
     }
 }

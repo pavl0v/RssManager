@@ -53,6 +53,7 @@ namespace RssManager.Objects.BO
         private string name = "RSS-CHANNEL-NAME";
         private long id = 0;
         private long userId = 0;
+        private bool autorefresh = false;
         private string xml = string.Empty;
         private List<IRssItemDTO> items = new List<IRssItemDTO>();
         private IRssSourceContentReader reader = null;
@@ -181,16 +182,16 @@ namespace RssManager.Objects.BO
             set { this.id = value; }
         }
 
-        //public long UserId
-        //{
-        //    get { return this.userId; }
-        //    set { this.userId = value; }
-        //}
-
         public string Name
         {
             get { return this.name; }
             set { this.name = value; }
+        }
+
+        public bool Autorefresh
+        {
+            get { return this.autorefresh; }
+            set { this.autorefresh = value; }
         }
 
         [JsonConverter(typeof(JsonArrayToRssItemsCollectionConverter))]
@@ -227,6 +228,7 @@ namespace RssManager.Objects.BO
 
         public RssChannel(IRssChannelDTO dto, IRssItemRepository rssItemRepository)
         {
+            this.autorefresh = dto.Autorefresh;
             this.copyright = dto.RssCopyright;
             this.description = dto.RssDescription;
             this.id = dto.Id;
@@ -234,7 +236,6 @@ namespace RssManager.Objects.BO
             this.title = dto.RssTitle;
             this.url = dto.Url;
             this.name = dto.Name;
-            //this.userId = dto.UserId;
 
             if (this.url.StartsWith("http://") || this.url.StartsWith("https://"))
                 this.reader = new RssHttpContentReader(this.url);

@@ -22,13 +22,21 @@
                 var deferred = $q.defer();
                 $http.get(urlBase)
                     .success(function (data) {
-                        if (data != undefined && data.length > 0) {
-                            for (i = 0; i < data.length; i++) {
-                                data[i].HasUpdates = false;
-                            }
+                        var channels = [];
+                        for (var i = 0; i < data.length; i++) {
+                            var css = "channel";
+                            if (data[i].Autorefresh)
+                                css = "channel-autorefresh";
+                            channels.push({
+                                "Autorefresh": data[i].Autorefresh,
+                                "Id": data[i].Id,
+                                "Name": data[i].Name,
+                                "Url": data[i].Url,
+                                "CssClass": css
+                            });
                         }
                         deferred.resolve({
-                            data: data
+                            data: channels
                         });
                     })
                     .error(function (msg, code) {

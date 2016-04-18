@@ -44,12 +44,18 @@ namespace RssManager.WebAPI.SignalR
             if (!autoRefresh)
                 return;
 
-            //System.Diagnostics.Debug.WriteLine("AUTOREFRESH IS ON");
-            log.Error("AUTOREFRESH IS ON");
+            log.Info("AUTOREFRESH IS ON");
 
             List<ConnectionChannel> messages = new List<ConnectionChannel>();
             IEnumerable<IRssChannel> channels = this.rssChannelRepository.GetAll();
-            foreach (IRssChannel channel in channels)
+            IEnumerable<IRssChannel> channels2refresh = channels.Where(x => x.Autorefresh == true);
+            if (channels2refresh == null || channels2refresh.Count() == 0)
+            {
+                log.Info("There are no channels to autorefresh");
+                return;
+            }
+
+            foreach (IRssChannel channel in channels2refresh)
             {
                 List<ConnectionChannel> message = null;
                 try
@@ -61,12 +67,12 @@ namespace RssManager.WebAPI.SignalR
                 {
                     log.Error(ex.ToString());
                 }
-                
             }
+
             IEnumerable<string> subscribers = messages.Select(x => x.ConnectionId).Distinct();
             if (subscribers == null || subscribers.Count() == 0)
             {
-                log.Error("There are no any subscribers");
+                log.Info("There are no any subscribers");
                 return;
             }
             

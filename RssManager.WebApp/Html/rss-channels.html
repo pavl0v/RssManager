@@ -1,6 +1,9 @@
 ﻿<md-list>
     <md-list-item ng-repeat="i in channels" ng-click="click(i)">
-        <p>{{ i.Name }}<span ng-if="i.NewItems > 0" style="color:red;">&nbsp;({{ i.NewItems }})</span></p>
+        <p>
+            <span ng-class="i.CssClass">{{ i.Name }}</span>
+            <span ng-if="i.NewItems > 0" style="color:red;">&nbsp;({{ i.NewItems }})</span>
+        </p>
         <md-button class="md-icon-button" ng-click="showDialogDeleteChannel($event, i.Id)">
             <md-icon aria-label="Delete" md-svg-icon="Images/Icons/Material/round-delete-button.svg"></md-icon>
         </md-button>

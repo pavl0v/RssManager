@@ -24,6 +24,7 @@ BEGIN
 			,[LANGUAGE] 
 			,[TITLE] 
 			,[URL]
+			,[AUTOREFRESH]
 			,[IS_DELETED])
 		VALUES (
 			 @copyright 
@@ -31,6 +32,7 @@ BEGIN
 			,@language 
 			,@title 
 			,@url
+			,0
 			,0);
 		SET @channel_id = (SELECT SCOPE_IDENTITY());
 	END

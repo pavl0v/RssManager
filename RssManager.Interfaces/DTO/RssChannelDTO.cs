@@ -31,5 +31,6 @@ namespace RssManager.Interfaces.DTO
         public string Name { get; set; }
         public string Url { get; set; }
         public long Id { get; set; }
+        public bool Autorefresh { get; set; }
     }
 }
