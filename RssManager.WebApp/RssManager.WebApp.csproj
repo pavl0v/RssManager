@@ -88,7 +88,6 @@
     <Content Include="Scripts\app\module-api-rss-channels.js" />
     <Content Include="Scripts\app\module-api-rss-items.js" />
     <None Include="packages.config" />
-    <None Include="Properties\PublishProfiles\RssManager.WebApp.FILE.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
@@ -104,7 +103,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\PublishProfiles\RssManager.WebApp.LUX.pubxml" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -3,6 +3,7 @@
 
 *.dbmdl
 *.publish.xml
+*.pubxml
 *.refactorlog
 *.scmp
 *.log

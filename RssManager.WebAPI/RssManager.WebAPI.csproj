@@ -187,7 +187,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="log4net-config.xml" />
-    <None Include="Properties\PublishProfiles\RssManager.WebAPI.FILE.pubxml" />
     <None Include="library.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -203,6 +202,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -220,9 +220,6 @@
       <Project>{91a04cc7-bea6-4e3b-b2d1-b78a60a08283}</Project>
       <Name>RssManager.Repository.ADO</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\PublishProfiles\RssManager.WebAPI.LUX.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
