@@ -187,6 +187,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="log4net-config.xml" />
+    <Content Include="Config\AppSettings.config" />
     <None Include="library.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
