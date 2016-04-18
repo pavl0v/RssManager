@@ -21,7 +21,7 @@
         <img data-ng-src="Images/item-read-state-{{i.ReadState}}.png" data-ng-click="click(i)" class="md-avatar" alt="alt" />
         <div class="md-list-item-text">
             <h3>[{{i.PubDateTimeFormatted}}] {{i.RssTitle}}</h3>
-            <p>{{i.RssDescription}}</p>
+            <p>{{i.RssDescription}}&nbsp;<a href="{{ i.RssLink }}" target="_blank">>></a></p>
         </div>
     </md-list-item>
 </md-list>
