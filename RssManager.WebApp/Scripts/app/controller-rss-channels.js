@@ -64,11 +64,14 @@
          */
         $scope.$on("ChannelsUpdatedEvent", function (event, args) {
             for (var i = 0; i < $scope.channels.length; i++) {
-                var strId = $scope.channels[i].Id.toString();
-                var idx = args.arr.indexOf(strId);
-                if (idx != -1) {
-                    $scope.channels[i].HasUpdates = true;
+                var newItems = 0;
+                for (var j = 0; j < args.length; j++) {
+                    if (args[j].ChannelId == $scope.channels[i].Id) {
+                        newItems = args[j].NewItems;
+                        break;
+                    }
                 }
+                $scope.channels[i].NewItems = newItems;
             }
         });
 
@@ -88,7 +91,7 @@
          * Channel click
          */
         function onClick(channel) {
-            channel.HasUpdates = false;
+            channel.NewItems = 0;
             $rootScope.$broadcast("ChannelSelectedEvent", { channelId: channel.Id });
         }
 

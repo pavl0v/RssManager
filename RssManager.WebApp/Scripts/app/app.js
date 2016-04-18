@@ -62,9 +62,9 @@
                     //console.log(message);
                     showSimpleToast("Some RSS channels got updated");
                     //$("#pfooter").hide().fadeIn(3000);
-                    var arr = message.split(';');
+                    var arr = JSON.parse(message);
                     if (arr != undefined && arr.length > 0) {
-                        $rootScope.$broadcast("ChannelsUpdatedEvent", { arr: arr });
+                        $rootScope.$broadcast("ChannelsUpdatedEvent", arr);
                     }
                 };
                 $.connection.hub.start()

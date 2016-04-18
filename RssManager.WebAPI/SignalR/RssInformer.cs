@@ -1,5 +1,6 @@
 ﻿using log4net;
 using Microsoft.AspNet.SignalR;
+using Newtonsoft.Json;
 using RssManager.Interfaces.BO;
 using RssManager.Interfaces.DTO;
 using RssManager.Interfaces.Repository;
@@ -46,15 +47,15 @@ namespace RssManager.WebAPI.SignalR
             //System.Diagnostics.Debug.WriteLine("AUTOREFRESH IS ON");
             log.Error("AUTOREFRESH IS ON");
 
-            List<ConnectionChannel> destinations = new List<ConnectionChannel>();
+            List<ConnectionChannel> messages = new List<ConnectionChannel>();
             IEnumerable<IRssChannel> channels = this.rssChannelRepository.GetAll();
             foreach (IRssChannel channel in channels)
             {
-                List<ConnectionChannel> dest = null;
+                List<ConnectionChannel> message = null;
                 try
                 {
-                    dest = ProcessRssChannel(channel);
-                    destinations.AddRange(dest);
+                    message = ProcessRssChannel(channel);
+                    messages.AddRange(message);
                 }
                 catch (Exception ex)
                 {
@@ -62,26 +63,20 @@ namespace RssManager.WebAPI.SignalR
                 }
                 
             }
-            IEnumerable<string> connections = destinations.Select(x => x.ConnectionId).Distinct();
-            if (connections == null || connections.Count() == 0)
+            IEnumerable<string> subscribers = messages.Select(x => x.ConnectionId).Distinct();
+            if (subscribers == null || subscribers.Count() == 0)
             {
                 log.Error("There are no any subscribers");
                 return;
             }
             
-            foreach (string connectionId in connections)
+            foreach (string connectionId in subscribers)
             {
-                StringBuilder sb = new StringBuilder();
-                IEnumerable<string> strChannelIds = destinations.Where(x => x.ConnectionId == connectionId).Select(x => x.ChannelId.ToString());
-                if (strChannelIds != null)
-                {
-                    foreach (string strId in strChannelIds)
-                    {
-                        sb.Append(strId);
-                        sb.Append(";");
-                    }
-                }
-                this.backendHub.Clients.Client(connectionId).broadcastMessage(sb.ToString().Trim());
+                string str = string.Empty;
+                IEnumerable<ConnectionChannel> messages2subscriber = messages.Where(x => x.ConnectionId == connectionId);
+                if (messages2subscriber != null)
+                    str = JsonConvert.SerializeObject(messages2subscriber);
+                this.backendHub.Clients.Client(connectionId).broadcastMessage(str);
             }
         }
 
@@ -90,19 +85,19 @@ namespace RssManager.WebAPI.SignalR
             List<ConnectionChannel> res = new List<ConnectionChannel>();
 
             channel.Refresh();
-            bool newItems = false;
+            int newItems = 0;
             foreach (IRssItemDTO item in channel.Items)
             {
                 IRssItemDTO existingItem = rssItemRepository.GetByGuid(item.RssGuid);
                 if (existingItem == null)
                 {
-                    newItems = true;
+                    newItems++;
                     rssItemRepository.Add(item);
                     //break;
                 }
             }
 
-            if (!newItems)
+            if (newItems == 0)
                 return res;
 
             List<ISubscriberDTO> channelSubscribers = channel.GetSubscribers(this.userRepository);
@@ -116,7 +111,13 @@ namespace RssManager.WebAPI.SignalR
 
                 foreach (var connectionId in BackendHub.connections.GetConnections(name))
                 {
-                    res.Add(new ConnectionChannel { ConnectionId = connectionId, ChannelId = channel.Id });
+                    res.Add(
+                        new ConnectionChannel() 
+                        { 
+                            ConnectionId = connectionId, 
+                            ChannelId = channel.Id, 
+                            NewItems = newItems 
+                        });
                 }
             }
 
@@ -125,8 +126,10 @@ namespace RssManager.WebAPI.SignalR
 
         class ConnectionChannel
         {
+            [JsonIgnore]
             public string ConnectionId { get; set; }
             public long ChannelId { get; set; }
+            public int NewItems { get; set; }
         }
     }
 }
