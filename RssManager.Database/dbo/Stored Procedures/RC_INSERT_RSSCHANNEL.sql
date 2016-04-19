@@ -7,7 +7,8 @@ CREATE PROCEDURE RC_INSERT_RSSCHANNEL
 	@language nvarchar(10),
 	@name nvarchar(25),
 	@title nvarchar(50), 
-	@url nvarchar(100)
+	@url nvarchar(100),
+	@autorefresh bit = 0
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -32,7 +33,7 @@ BEGIN
 			,@language 
 			,@title 
 			,@url
-			,0
+			,@autorefresh
 			,0);
 		SET @channel_id = (SELECT SCOPE_IDENTITY());
 	END

@@ -51,6 +51,7 @@ namespace RssManager.WebAPI.Controllers
 
             IRssSourceContentReader reader = new RssHttpContentReader(channelDTO.Url);
             RssChannel channelBO = new RssChannel(reader, this.rssItemRepository);
+            channelBO.Autorefresh = false;
             channelBO.Name = channelDTO.Name;
 
             long userId = Helper.GetCurrentUserID(User);

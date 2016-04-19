@@ -261,6 +261,7 @@ namespace RssManager.Repository.ADO
             SqlCommand cmd = new SqlCommand("RC_INSERT_RSSCHANNEL");
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
+            cmd.Parameters.Add(new SqlParameter("@autorefresh", channel.Autorefresh));
             cmd.Parameters.Add(new SqlParameter("@copyright", channel.RssCopyright));
             cmd.Parameters.Add(new SqlParameter("@description", channel.RssDescription));
             cmd.Parameters.Add(new SqlParameter("@language", channel.RssLanguage));
