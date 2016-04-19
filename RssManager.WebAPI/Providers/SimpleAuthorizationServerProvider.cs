@@ -17,35 +17,42 @@ namespace RssManager.WebAPI.Providers
 
         public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
-            context.Validated();
+            await Task.Run(() =>
+            {
+                context.Validated();
+            });
         }
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
-            User user = null;
-            try
-            {
-                user = this.userRepository.GetByUsername(context.UserName) as User;
-            }
-            catch
+            await Task.Run(() =>
             {
 
-            }
-            if (user == null || !user.Password.Equals(Helper.GetHashedString(context.Password + user.Guid)))
-            {
-                context.SetError("invalid_grant", "The user name or password is incorrect.");
-                return;
-            }
+                context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+                User user = null;
+                try
+                {
+                    user = this.userRepository.GetByUsername(context.UserName) as User;
+                }
+                catch
+                {
 
-            System.Security.Principal.IIdentity i = new MyIdentity(user.UserName, context.Options.AuthenticationType);
-            var identity = new ClaimsIdentity(i, new List<Claim> {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(ClaimTypes.Role, "user")
+                }
+                if (user == null || !user.Password.Equals(Helper.GetHashedString(context.Password + user.Guid)))
+                {
+                    context.SetError("invalid_grant", "The user name or password is incorrect.");
+                    return;
+                }
+
+                System.Security.Principal.IIdentity i = new MyIdentity(user.UserName, context.Options.AuthenticationType);
+                var identity = new ClaimsIdentity(i, new List<Claim> {
+                            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                            new Claim(ClaimTypes.Name, user.UserName),
+                            new Claim(ClaimTypes.Role, "user")
+                        });
+
+                context.Validated(identity);
             });
-
-            context.Validated(identity);
         }
     }
 }
