@@ -27,7 +27,6 @@ namespace RssManager.WebAPI.Providers
         {
             await Task.Run(() =>
             {
-
                 context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
                 User user = null;
                 try
