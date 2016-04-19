@@ -1,7 +1,7 @@
 ﻿(function () {
     var app = angular.module("app");
-    app.controller("controllerMainMenu", ["$scope", "$rootScope", "$window", "$location", "factoryRssChannels", "factoryCommon", "factoryDialogs", "factoryUsers",
-        function ($scope, $rootScope, $window, $location, factoryRssChannels, factoryCommon, factoryDialogs, factoryUsers) {
+    app.controller("controllerMainMenu", ["$scope", "$rootScope", "$window", "$location", "factoryRssChannels", "factoryCommon", "factoryDialogs", "factoryUsers", "factoryAuth",
+        function ($scope, $rootScope, $window, $location, factoryRssChannels, factoryCommon, factoryDialogs, factoryUsers, factoryAuth) {
 
             /**
              * Dialog for add new RSS channel
@@ -77,10 +77,9 @@
              * User log out
              */
             function onLogOut() {
-                $window.sessionStorage.removeItem("RssManagerToken");
-                $scope.$parent.backendHub.server.unsubscribe($window.sessionStorage.getItem("RssManagerUser"))
-                    .done(function () { $window.sessionStorage.removeItem("RssManagerUser"); })
-                    .fail(function () { $window.sessionStorage.removeItem("RssManagerUser"); });
+                $scope.$parent.backendHub.server.unsubscribe(factoryAuth.getUser())
+                    .done(function () { factoryAuth.clearAuthentication(); })
+                    .fail(function () { factoryAuth.clearAuthentication(); });
                 //$location.path('/');
                 $window.location.href = "/rssmanager/";
             }

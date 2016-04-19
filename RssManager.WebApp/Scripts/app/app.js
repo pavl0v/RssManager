@@ -1,5 +1,5 @@
 ﻿(function () {
-    var app = angular.module("app", ["moduleAuthInterceptor", "moduleApiRssChannels", "moduleApiRssItems",
+    var app = angular.module("app", ["moduleAuth", "moduleApiRssChannels", "moduleApiRssItems",
         "moduleCommon", "moduleDialogs", "moduleDirectives", "moduleApiUsers", "ngRoute", "ngMaterial", "ngMessages"]);
 
     app.config(function ($httpProvider, $routeProvider, $mdThemingProvider) {
@@ -31,10 +31,29 @@
     });
 
     /**
+     * Prevent navigation when not authorized, except "/auth" page
+     */
+    app.run(["$rootScope", "$location", "factoryAuth", function ($rootScope, $location, factoryAuth) {
+        $rootScope.$on("$routeChangeStart", function (event) {
+            if ($location.path() == "/auth")
+                return;
+
+            if (!factoryAuth.isAuthenticated()) {
+                console.log("DENY : Redirecting to Login");
+                event.preventDefault();
+                $location.path("/auth");
+            }
+            else {
+                console.log("ALLOW");
+            }
+        });
+    }])
+
+    /**
      *
      */
-    app.controller("appctrl", ["$scope", "$rootScope", "$window", "$mdToast", "factoryCommon", "factoryDialogs",
-        function ($scope, $rootScope, $window, $mdToast, factoryCommon, factoryDialogs) {
+    app.controller("appctrl", ["$scope", "$rootScope", "$window", "$mdToast", "factoryCommon", "factoryDialogs", "factoryAuth",
+        function ($scope, $rootScope, $window, $mdToast, factoryCommon, factoryDialogs, factoryAuth) {
 
             var showSimpleToast = function (message) {
                 $mdToast.show({
@@ -69,8 +88,8 @@
                 };
                 $.connection.hub.start()
                     .done(function () {
-                        if ($window.sessionStorage.getItem("RssManagerToken") && $window.sessionStorage.getItem("RssManagerUser")) {
-                            $scope.backendHub.server.subscribe($window.sessionStorage.getItem("RssManagerUser"));
+                        if (factoryAuth.isAuthenticated()) {
+                            $scope.backendHub.server.subscribe(factoryAuth.getUser());
                             //.done(function () { console.log("backendHub.subscribe OK"); })
                             //.fail(function () { console.log("backendHub.subscribe ERROR"); });
                         }

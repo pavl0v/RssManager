@@ -84,7 +84,7 @@
     <Content Include="Scripts\app\module-api-users.js" />
     <Content Include="Scripts\app\module-dialogs.js" />
     <Content Include="Scripts\app\module-directives.js" />
-    <Content Include="Scripts\app\module-auth-interceptor.js" />
+    <Content Include="Scripts\app\module-auth.js" />
     <Content Include="Scripts\app\module-common.js" />
     <Content Include="Scripts\app\module-api-rss-channels.js" />
     <Content Include="Scripts\app\module-api-rss-items.js" />

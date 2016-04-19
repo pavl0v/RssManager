@@ -1,7 +1,7 @@
 ﻿(function () {
     var app = angular.module("app");
-    app.controller("controllerLogin", ["$scope", "$http", "$window", "$location", "factoryDialogs", "factoryUsers", "factoryCommon",
-        function ($scope, $http, $window, $location, factoryDialogs, factoryUsers, factoryCommon) {
+    app.controller("controllerLogin", ["$scope", "$http", "$window", "$location", "factoryDialogs", "factoryUsers", "factoryCommon", "factoryAuth",
+        function ($scope, $http, $window, $location, factoryDialogs, factoryUsers, factoryCommon, factoryAuth) {
 
             $scope.model = {
                 Username: "",
@@ -56,10 +56,9 @@
                 };
                 $http.post(url, data, config).then(
                     function (response) {
-                        $window.sessionStorage.setItem("RssManagerToken", response.data.access_token);
-                        $window.sessionStorage.setItem("RssManagerUser", model.Username);
+                        factoryAuth.setAuthentication(response.data.access_token, model.Username);
                         $location.path("/home");
-                        $scope.$parent.backendHub.server.subscribe($window.sessionStorage.getItem("RssManagerUser"));
+                        $scope.$parent.backendHub.server.subscribe(factoryAuth.getUser());
                             //.done(function () { console.log("backendHub.subscribe OK"); })
                             //.fail(function () { console.log("backendHub.subscribe ERROR"); });
                     },
