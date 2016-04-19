@@ -113,7 +113,36 @@ namespace RssManager.Repository.ADO
 
         public IUserDTO Get(long id)
         {
-            throw new NotImplementedException();
+            List<UserDTO> lst = new List<UserDTO>();
+
+            using (SqlConnection con = Common.GetConnection())
+            {
+                using (SqlCommand cmd = SQLCMD_USR_SELECT_USER_BY_ID(id))
+                {
+                    cmd.Connection = con;
+                    con.Open();
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            UserDTO dto = ReadUser(reader);
+                            lst.Add(dto);
+                        }
+                    }
+
+                    con.Close();
+                }
+            }
+
+            if (lst.Count > 0)
+            {
+                return new User(lst[0]);
+            }
+
+            string errorMsg = string.Format("Account ID={0} does not exist in database", id);
+            log.Error(errorMsg);
+            throw new Exception(errorMsg);
         }
 
         #endregion
@@ -138,6 +167,16 @@ namespace RssManager.Repository.ADO
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("@username", username);
+
+            return cmd;
+        }
+
+        private static SqlCommand SQLCMD_USR_SELECT_USER_BY_ID(long id)
+        {
+            SqlCommand cmd = new SqlCommand("USR_SELECT_USER_BY_ID");
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@id", id);
 
             return cmd;
         }

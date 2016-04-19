@@ -1,0 +1,16 @@
+﻿CREATE PROCEDURE [dbo].[USR_SELECT_USER_BY_ID]
+	@id bigint
+AS
+BEGIN
+	SELECT 
+		 [ID]
+		,[USER_NAME]
+		,[PASSWORD]
+		,[FIRST_NAME]
+		,[LAST_NAME]
+		,[GUID]
+	FROM
+		[dbo].[USER]
+	WHERE
+		[ID]=@id;
+END

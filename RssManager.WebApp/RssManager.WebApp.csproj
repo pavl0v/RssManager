@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Html\captcha.html" />
+    <Content Include="Html\dialog-password.html" />
     <Content Include="Html\dialog-channel.html" />
     <Content Include="Html\dialog-sign-up.html" />
     <Content Include="Html\rss-channels.html" />

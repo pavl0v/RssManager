@@ -5,12 +5,18 @@
 
         // INTERFACE
         var factory = {
-            postUser: postUser
+            postUser: postUser,
+            putPassword: putPassword
         };
         return factory;
 
         function postUser(user) {
             return $http.post(urlBase, user);
+        }
+
+        function putPassword(oldpwd, newpwd) {
+            var url = urlBase + "/password/?oldpwd=" + oldpwd + "&newpwd=" + newpwd;
+            return $http.put(url);
         }
     }]);
 })();

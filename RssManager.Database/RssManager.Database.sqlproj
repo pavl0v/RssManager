@@ -99,6 +99,7 @@
     <Build Include="dbo\Stored Procedures\RC_UPDATE_RSSCHANNEL_BY_USER_ID.sql" />
     <Build Include="dbo\Stored Procedures\USR_SELECT_USERS_BY_RSSCHANNEL_ID.sql" />
     <Build Include="dbo\Stored Procedures\RC_SELECT_RSSCHANNELS.sql" />
+    <Build Include="dbo\Stored Procedures\USR_SELECT_USER_BY_ID.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />

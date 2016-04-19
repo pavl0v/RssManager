@@ -38,7 +38,7 @@
              */
             function onPostUser(user) {
                 factoryUsers.postUser(user).then(
-                    function () { factoryDialogs.dlgAlert(null, "DONE", "Account created successfuly"); },
+                    function () { factoryDialogs.dlgAlert(null, "DONE", "Account created successfully"); },
                     function (error) { factoryDialogs.dlgError(null, null, error); }
                 );
             }

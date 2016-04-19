@@ -100,5 +100,51 @@ namespace RssManager.WebAPI.Controllers
                 throw new HttpResponseException(message);
             }
         }
+
+        [HttpPut]
+        [Authorize]
+        public void Password(string oldpwd, string newpwd)
+        {
+            long userId = Helper.GetCurrentUserID(User);
+            User user = null;
+            try
+            {
+                user = this.userRepository.Get(userId) as User;
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.ToString());
+                var message = new HttpResponseMessage(HttpStatusCode.BadRequest) { Content = new StringContent(ex.Message) };
+                throw new HttpResponseException(message);
+            }
+
+            if (user == null)
+            {
+                string msg = "User is NULL";
+                log.Error(msg);
+                var message = new HttpResponseMessage(HttpStatusCode.BadRequest) { Content = new StringContent(msg) };
+                throw new HttpResponseException(message);
+            }
+
+            if (user.Password != Helper.GetHashedString(oldpwd + user.Guid))
+            {
+                string msg = "Current password is incorrect";
+                log.Error(msg);
+                var message = new HttpResponseMessage(HttpStatusCode.BadRequest) { Content = new StringContent(msg) };
+                throw new HttpResponseException(message);
+            }
+
+            try
+            {
+                user.Password = Helper.GetHashedString(newpwd + user.Guid);
+                this.userRepository.Save(user);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.ToString());
+                var message = new HttpResponseMessage(HttpStatusCode.BadRequest) { Content = new StringContent(ex.Message) };
+                throw new HttpResponseException(message);
+            }
+        }
     }
 }

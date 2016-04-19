@@ -62,5 +62,26 @@
             }
         }
     });
+
+    directives.directive("ngMatch", ["$parse", function ($parse) {
+        var res = {
+            restrict: "A",
+            require: "ngModel",
+            link: link
+        }
+        return res;
+
+        function link(scope, element, attrs, ngModel /*controller, transcludeFn*/) {
+            var strMatch = attrs["ngMatch"];
+            var fnMatch = $parse(strMatch);
+            ngModel.$validators.match = function (value) {
+                var match = fnMatch(scope);
+                if (value != match)
+                    return false;
+                else
+                    return true;
+            }
+        }
+    }]);
 })();
 
