@@ -36,4 +36,12 @@ namespace RssManager.Objects.Json
             return new RssItem();
         }
     }
+
+    public class JsonToTokenConverter : JsonCreationConverter<Token>
+    {
+        protected override Token Create(Type objectType, JObject jsonObject)
+        {
+            return new Token();
+        }
+    }
 }

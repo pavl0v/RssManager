@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RssManager.WebApp", "RssMan
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RssManager.Repository.ADO", "RssManager.Repository.ADO\RssManager.Repository.ADO.csproj", "{91A04CC7-BEA6-4E3B-B2D1-B78A60A08283}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RssManager.DesktopApp", "RssManager.DesktopApp\RssManager.DesktopApp.csproj", "{2D74618D-0CBE-491D-9DF3-16C899BE31A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{91A04CC7-BEA6-4E3B-B2D1-B78A60A08283}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91A04CC7-BEA6-4E3B-B2D1-B78A60A08283}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91A04CC7-BEA6-4E3B-B2D1-B78A60A08283}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D74618D-0CBE-491D-9DF3-16C899BE31A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D74618D-0CBE-491D-9DF3-16C899BE31A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D74618D-0CBE-491D-9DF3-16C899BE31A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D74618D-0CBE-491D-9DF3-16C899BE31A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,9 @@
+﻿<Application x:Class="RssManager.DesktopApp.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModels="clr-namespace:RssManager.DesktopApp.ViewModels"
+             StartupUri="Views/SignIn.xaml">
+    <Application.Resources>
+        <viewModels:SignInViewModel x:Key="signInViewModel"></viewModels:SignInViewModel>
+    </Application.Resources>
+</Application>

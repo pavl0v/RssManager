@@ -64,8 +64,13 @@
     <Compile Include="RssChannelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RssItemTest.cs" />
+    <Compile Include="SignInModelTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RssManager.DesktopApp\RssManager.DesktopApp.csproj">
+      <Project>{2d74618d-0cbe-491d-9df3-16c899be31a3}</Project>
+      <Name>RssManager.DesktopApp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RssManager.Interfaces\RssManager.Interfaces.csproj">
       <Project>{0e1a487b-6197-4663-b9dd-f5fa49673fcd}</Project>
       <Name>RssManager.Interfaces</Name>

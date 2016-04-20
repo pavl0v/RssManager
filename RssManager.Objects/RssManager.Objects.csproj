@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BO\Settings.cs" />
+    <Compile Include="BO\Token.cs" />
     <Compile Include="Exceptions\DuplicateEntityException.cs" />
     <Compile Include="Exceptions\RssSourceParseException.cs" />
     <Compile Include="Json\ConcreteConverter.cs">
