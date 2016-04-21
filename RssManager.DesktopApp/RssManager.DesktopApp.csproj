@@ -60,7 +60,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="RelayCommandAsync.cs" />
     <Compile Include="Models\SignInModel.cs" />
+    <Compile Include="RelayCommand.cs" />
+    <Compile Include="TaskCompleteEventArgs.cs" />
+    <Compile Include="TaskCompleteStateEnum.cs" />
     <Compile Include="ViewModels\SignInViewModel.cs" />
     <Compile Include="Views\SignIn.xaml.cs">
       <DependentUpon>SignIn.xaml</DependentUpon>
@@ -109,6 +113,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RssManager.Interfaces\RssManager.Interfaces.csproj">
+      <Project>{0e1a487b-6197-4663-b9dd-f5fa49673fcd}</Project>
+      <Name>RssManager.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RssManager.Objects\RssManager.Objects.csproj">
       <Project>{e13fd2e0-84b6-4a68-b66d-f5754e02ee36}</Project>
       <Name>RssManager.Objects</Name>

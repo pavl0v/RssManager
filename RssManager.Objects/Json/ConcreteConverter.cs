@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using RssManager.Interfaces.DTO;
 using RssManager.Objects.BO;
 using System;
 
@@ -37,11 +38,11 @@ namespace RssManager.Objects.Json
         }
     }
 
-    public class JsonToTokenConverter : JsonCreationConverter<Token>
+    public class JsonToTokenConverter : JsonCreationConverter<TokenPOCO>
     {
-        protected override Token Create(Type objectType, JObject jsonObject)
+        protected override TokenPOCO Create(Type objectType, JObject jsonObject)
         {
-            return new Token();
+            return new TokenPOCO();
         }
     }
 }

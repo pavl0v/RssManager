@@ -1,17 +1,18 @@
 ﻿using Newtonsoft.Json;
-using RssManager.Objects.BO;
+using RssManager.Interfaces.DTO;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace RssManager.DesktopApp.Models
 {
     public class SignInModel
     {
-        public void Auth(string username, string password)
+        public TokenDTO Auth(string username, string password)
         {
             HttpWebRequest request = WebRequest.Create("http://localhost:64910/token") as HttpWebRequest;
             request.Method = "POST";
@@ -26,18 +27,38 @@ namespace RssManager.DesktopApp.Models
             }
 
             string json = string.Empty;
-            using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
+
+            try
             {
-                using (Stream r = response.GetResponseStream())
+                using (WebResponse response = request.GetResponse())
                 {
-                    using (StreamReader sr = new StreamReader(r))
+                    using (Stream stream = response.GetResponseStream())
                     {
-                        json = sr.ReadToEnd();
+                        using (StreamReader sr = new StreamReader(stream))
+                        {
+                            json = sr.ReadToEnd();
+                        }
                     }
                 }
             }
+            catch (WebException ex)
+            {
+                string errorMessage = string.Empty;
+                using (WebResponse wr = ex.Response)
+                {
+                    using (Stream stream = wr.GetResponseStream())
+                    {
+                        using (StreamReader sr = new StreamReader(stream))
+                        {
+                            errorMessage = sr.ReadToEnd();
+                        }
+                    }
+                }
+                throw new Exception(errorMessage);
+            }
 
-            Token token = JsonConvert.DeserializeObject<Token>(json);
+            TokenDTO token = JsonConvert.DeserializeObject<TokenDTO>(json);
+            return token;
         }
     }
 }
