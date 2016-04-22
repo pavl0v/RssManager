@@ -38,11 +38,11 @@ namespace RssManager.Objects.Json
         }
     }
 
-    public class JsonToTokenConverter : JsonCreationConverter<TokenPOCO>
+    public class JsonToTokenConverter : JsonCreationConverter<TokenDTO>
     {
-        protected override TokenPOCO Create(Type objectType, JObject jsonObject)
+        protected override TokenDTO Create(Type objectType, JObject jsonObject)
         {
-            return new TokenPOCO();
+            return new TokenDTO();
         }
     }
 }
