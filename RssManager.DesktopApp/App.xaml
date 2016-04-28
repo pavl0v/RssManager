@@ -2,8 +2,12 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:viewModels="clr-namespace:RssManager.DesktopApp.ViewModels"
+             xmlns:dialogOk="clr-namespace:RssManager.DesktopApp.Dialogs.DialogOk"
              StartupUri="Views/SignIn.xaml">
     <Application.Resources>
-        <viewModels:SignInViewModel x:Key="signInViewModel"></viewModels:SignInViewModel>
+        <viewModels:ViewModelLocator x:Key="ViewModelLocator"></viewModels:ViewModelLocator>
+        <DataTemplate DataType="{x:Type dialogOk:DialogOkViewModel}">
+            <dialogOk:DialogOkView></dialogOk:DialogOkView>
+        </DataTemplate>
     </Application.Resources>
 </Application>

@@ -19,13 +19,13 @@ namespace RssManager.DesktopApp
             get { return this.isExecuting; }
         }
 
-        public RelayCommandAsync(Action execute)
+        public RelayCommandAsync(Action<object> execute)
             : base(execute)
         {
 
         }
 
-        public RelayCommandAsync(Action execute, Func<bool> canExecute)
+        public RelayCommandAsync(Action<object> execute, Func<bool> canExecute)
             : base (execute, canExecute)
         {
 
@@ -43,21 +43,21 @@ namespace RssManager.DesktopApp
                 this.isExecuting = true;
                 if (this.Started != null)
                     this.Started(this, EventArgs.Empty);
-                Task task = new Task(() => { this.execute(); });
+                Task task = new Task(() => { this.execute(parameter); });
                 task.ContinueWith(t => 
                 {
                     if (t.IsFaulted)
                     {
-                        this.OnCompleted(new TaskCompleteEventArgs(TaskCompleteState.Error, t.Exception.InnerExceptions[0].Message));
+                        this.OnCompleted(new TaskCompleteEventArgs(TaskCompleteState.Error, t.Exception.InnerExceptions[0].Message, parameter));
                         return;
                     }
-                    this.OnCompleted(new TaskCompleteEventArgs(TaskCompleteState.Completed, "OK")); 
-                });
+                    this.OnCompleted(new TaskCompleteEventArgs(TaskCompleteState.Completed, "OK", parameter));
+                }, TaskScheduler.FromCurrentSynchronizationContext());
                 task.Start();
             }
             catch (Exception ex)
             {
-                this.OnCompleted(new TaskCompleteEventArgs(TaskCompleteState.Error, ex.Message));
+                this.OnCompleted(new TaskCompleteEventArgs(TaskCompleteState.Error, ex.Message, parameter));
             }
         }
 

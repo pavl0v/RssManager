@@ -1,7 +1,7 @@
 ﻿<Window x:Class="RssManager.DesktopApp.Views.SignIn"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        DataContext="{StaticResource ResourceKey=signInViewModel}"
+        DataContext="{Binding SignInViewModel, Source={StaticResource ResourceKey=ViewModelLocator}}"
         Title="SignIn" Height="150" Width="300" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -18,7 +18,7 @@
         <TextBox x:Name="tbUsername" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Text="{Binding Username}"></TextBox>
         <TextBox x:Name="tbPassword" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Text="{Binding Password}"></TextBox>
         <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="btnOK" Content="OK" Width="80" Height="24" Margin="2" Command="{Binding CmdOnSignIn}" ></Button>
+            <Button x:Name="btnOK" Content="OK" Width="80" Height="24" Margin="2" Command="{Binding CmdOnSignIn}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"></Button>
             <Button x:Name="btnCancel" Width="80" Height="24" Content="Cancel" Margin="2"></Button>
         </StackPanel>
     </Grid>

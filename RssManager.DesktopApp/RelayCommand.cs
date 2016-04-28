@@ -22,7 +22,7 @@ namespace RssManager.DesktopApp
         /// <summary>
         /// Creates a new command that can always execute.
         /// </summary>
-        protected readonly Action execute;
+        protected readonly Action<object> execute;
 
         /// <summary>
         /// True if command is executing, false otherwise
@@ -34,7 +34,7 @@ namespace RssManager.DesktopApp
         /// Initializes a new instance of <see cref="RelayCommand"/> that can always execute.
         /// </summary>
         /// <param name="execute">The execution logic.</param>
-        public RelayCommand(Action execute)
+        public RelayCommand(Action<object> execute)
             : this(execute, canExecute: null)
         {
         }
@@ -44,7 +44,7 @@ namespace RssManager.DesktopApp
         /// </summary>
         /// <param name="execute">The execution logic.</param>
         /// <param name="canExecute">The execution status logic.</param>
-        public RelayCommand(Action execute, Func<bool> canExecute)
+        public RelayCommand(Action<object> execute, Func<bool> canExecute)
         {
             if (execute == null)
             {
@@ -79,7 +79,7 @@ namespace RssManager.DesktopApp
         /// </param>
         public virtual void Execute(object parameter)
         {
-            this.execute();
+            this.execute(parameter);
         }
 
         /// <summary>

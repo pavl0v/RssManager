@@ -41,6 +41,10 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -60,15 +64,38 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Dialogs\DialogFacade\DialogFacade.cs" />
+    <Compile Include="Dialogs\DialogFacade\DialogViewModelBase.cs" />
+    <Compile Include="Dialogs\DialogFacade\DialogWindow.xaml.cs">
+      <DependentUpon>DialogWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DialogFacade\DialogWindowProperties.cs" />
+    <Compile Include="Dialogs\DialogResultEnum.cs" />
+    <Compile Include="Dialogs\DialogFacade\IDialogFacade.cs" />
+    <Compile Include="Dialogs\DialogOk\DialogOkView.xaml.cs">
+      <DependentUpon>DialogOkView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DialogOk\DialogOkViewModel.cs" />
+    <Compile Include="IoC\Container.cs" />
+    <Compile Include="IoC\Module.cs" />
     <Compile Include="RelayCommandAsync.cs" />
     <Compile Include="Models\SignInModel.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="TaskCompleteEventArgs.cs" />
     <Compile Include="TaskCompleteStateEnum.cs" />
     <Compile Include="ViewModels\SignInViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\SignIn.xaml.cs">
       <DependentUpon>SignIn.xaml</DependentUpon>
     </Compile>
+    <Page Include="Dialogs\DialogFacade\DialogWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\DialogOk\DialogOkView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

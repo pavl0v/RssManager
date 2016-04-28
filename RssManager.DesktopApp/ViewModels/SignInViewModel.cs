@@ -1,4 +1,5 @@
-﻿using RssManager.Interfaces.DTO;
+﻿using RssManager.DesktopApp.Dialogs.DialogFacade;
+using RssManager.Interfaces.DTO;
 using RssManager.Objects.BO;
 using System;
 using System.Collections.Generic;
@@ -9,10 +10,11 @@ using System.Windows.Input;
 
 namespace RssManager.DesktopApp.ViewModels
 {
-    internal class SignInViewModel
+    public class SignInViewModel
     {
         #region FIELDS
 
+        private IDialogFacade dialogFacade = null;
         private Models.SignInModel model = null;
         private RelayCommandAsync cmdOnSignIn = null;
         private string username = string.Empty;
@@ -44,14 +46,17 @@ namespace RssManager.DesktopApp.ViewModels
 
         #region CONSTRUCTOR
 
-        public SignInViewModel()
+        public SignInViewModel(IDialogFacade dialogFacade)
         {
+            this.dialogFacade = dialogFacade;
             this.model = new Models.SignInModel();
-            this.cmdOnSignIn = new RelayCommandAsync(new Action(OnSignIn));
+            this.cmdOnSignIn = new RelayCommandAsync(new Action<object>(OnSignIn));
             this.cmdOnSignIn.Completed += cmdOnSignIn_Completed;
         }
 
-        void cmdOnSignIn_Completed(object sender, EventArgs e)
+        #endregion
+
+        private void cmdOnSignIn_Completed(object sender, EventArgs e)
         {
             TaskCompleteEventArgs args = e as TaskCompleteEventArgs;
             if (args != null)
@@ -60,9 +65,24 @@ namespace RssManager.DesktopApp.ViewModels
                 {
                     case TaskCompleteState.Error:
                         System.Diagnostics.Debug.WriteLine("Completed with error: " + args.Message);
+                        this.dialogFacade.ShowDialogYesNo(
+                            args.Message, 
+                            new DialogWindowProperties {
+                                Owner = args.Parameter as System.Windows.Window,
+                                ResizeMode = System.Windows.ResizeMode.NoResize,
+                                Title = "Authentication"
+                            });
                         break;
                     case TaskCompleteState.Completed:
                         System.Diagnostics.Debug.WriteLine("Completed successfully");
+                        this.dialogFacade.ShowDialogYesNo(
+                            "Authentication completed successfully",
+                            new DialogWindowProperties
+                            {
+                                Owner = args.Parameter as System.Windows.Window,
+                                ResizeMode = System.Windows.ResizeMode.NoResize,
+                                Title = "Authentication"
+                            });
                         break;
                 }
                 return;
@@ -71,9 +91,7 @@ namespace RssManager.DesktopApp.ViewModels
             System.Diagnostics.Debug.WriteLine("Completed successfully");
         }
 
-        #endregion
-
-        private void OnSignIn()
+        private void OnSignIn(object parameter)
         {
             TokenDTO t = this.model.Auth(this.username, this.password);
             Token token = Token.GetInstance();
