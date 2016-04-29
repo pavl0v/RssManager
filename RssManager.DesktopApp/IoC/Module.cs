@@ -14,7 +14,7 @@ namespace RssManager.DesktopApp.IoC
         public override void Load()
         {
             Bind<IDialogFacade>().To<DialogFacade>().InSingletonScope();
-            Bind<SignInViewModel>().ToSelf();
+            Bind<MainWindowViewModel>().ToSelf();
         }
     }
 }

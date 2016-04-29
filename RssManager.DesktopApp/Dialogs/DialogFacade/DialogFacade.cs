@@ -13,9 +13,15 @@ namespace RssManager.DesktopApp.Dialogs.DialogFacade
 
         }
 
-        public DialogResult ShowDialogYesNo(string message, DialogWindowProperties properties)
+        public DialogResult ShowDialogOk(string message, DialogWindowProperties properties)
         {
             DialogViewModelBase vm = new DialogOk.DialogOkViewModel(message);
+            return this.ShowDialog(vm, properties);
+        }
+
+        public DialogResult ShowDialogSignIn(string message, DialogWindowProperties properties)
+        {
+            DialogViewModelBase vm = new DialogSignIn.DialogSignInViewModel(message);
             return this.ShowDialog(vm, properties);
         }
 
@@ -29,6 +35,9 @@ namespace RssManager.DesktopApp.Dialogs.DialogFacade
                 win.Title = properties.Title;
                 win.Owner = properties.Owner;
             }
+
+            if (win.Owner == null)
+                win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
             win.DataContext = vm;
             win.ShowDialog();

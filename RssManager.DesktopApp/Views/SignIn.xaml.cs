@@ -22,5 +22,10 @@ namespace RssManager.DesktopApp.Views
         {
             InitializeComponent();
         }
+
+        ~SignIn()
+        {
+
+        }
     }
 }

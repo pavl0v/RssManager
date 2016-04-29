@@ -1,8 +1,11 @@
-﻿<Window x:Class="RssManager.DesktopApp.MainWindow"
+﻿<Window x:Class="RssManager.DesktopApp.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        DataContext="{Binding MainWindowViewModel, Source={StaticResource ResourceKey=ViewModelLocator}}"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <Button Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75"
+                Command="{Binding Cmd}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+
     </Grid>
 </Window>

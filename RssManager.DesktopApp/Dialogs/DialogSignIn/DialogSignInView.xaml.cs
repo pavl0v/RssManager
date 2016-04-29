@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -12,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RssManager.DesktopApp.Views
+namespace RssManager.DesktopApp.Dialogs.DialogSignIn
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for DialogSignInView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class DialogSignInView : UserControl
     {
-        public MainWindow()
+        public DialogSignInView()
         {
             InitializeComponent();
         }

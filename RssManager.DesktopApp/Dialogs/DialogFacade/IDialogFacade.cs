@@ -8,6 +8,7 @@ namespace RssManager.DesktopApp.Dialogs.DialogFacade
 {
     public interface IDialogFacade
     {
-        DialogResult ShowDialogYesNo(string message, DialogWindowProperties properties);
+        DialogResult ShowDialogOk(string message, DialogWindowProperties properties);
+        DialogResult ShowDialogSignIn(string message, DialogWindowProperties properties);
     }
 }

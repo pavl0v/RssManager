@@ -3,11 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:viewModels="clr-namespace:RssManager.DesktopApp.ViewModels"
              xmlns:dialogOk="clr-namespace:RssManager.DesktopApp.Dialogs.DialogOk"
-             StartupUri="Views/SignIn.xaml">
+             xmlns:dialogSignIn="clr-namespace:RssManager.DesktopApp.Dialogs.DialogSignIn">
     <Application.Resources>
         <viewModels:ViewModelLocator x:Key="ViewModelLocator"></viewModels:ViewModelLocator>
         <DataTemplate DataType="{x:Type dialogOk:DialogOkViewModel}">
             <dialogOk:DialogOkView></dialogOk:DialogOkView>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type dialogSignIn:DialogSignInViewModel}">
+            <dialogSignIn:DialogSignInView></dialogSignIn:DialogSignInView>
         </DataTemplate>
     </Application.Resources>
 </Application>

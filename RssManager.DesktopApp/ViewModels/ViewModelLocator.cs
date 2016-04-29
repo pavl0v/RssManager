@@ -4,11 +4,11 @@ namespace RssManager.DesktopApp.ViewModels
 {
     public class ViewModelLocator
     {
-        public SignInViewModel SignInViewModel
+        public MainWindowViewModel MainWindowViewModel
         {
-            get 
+            get
             {
-                return IoC.Container.Instance.Kernel.Get<SignInViewModel>();
+                return IoC.Container.Instance.Kernel.Get<MainWindowViewModel>();
             }
         }
 
