@@ -6,6 +6,7 @@ using Ninject;
 using Ninject.Modules;
 using RssManager.DesktopApp.Dialogs.DialogFacade;
 using RssManager.DesktopApp.ViewModels;
+using RssManager.DesktopApp.Services;
 
 namespace RssManager.DesktopApp.IoC
 {
@@ -14,6 +15,9 @@ namespace RssManager.DesktopApp.IoC
         public override void Load()
         {
             Bind<IDialogFacade>().To<DialogFacade>().InSingletonScope();
+            Bind<IRequestApi>().To<RequestApi>().InSingletonScope();
+            Bind<IServiceChannels>().To<ServiceChannels>().InSingletonScope();
+            Bind<IServiceFacade>().To<ServiceFacade>().InSingletonScope();
             Bind<MainWindowViewModel>().ToSelf();
         }
     }

@@ -9,7 +9,7 @@ namespace RssManager.UnitTests
         [TestMethod]
         public void TestMethod1()
         {
-            DesktopApp.Models.SignInModel m = new DesktopApp.Models.SignInModel();
+            RssManager.DesktopApp.Models.SignInModel m = new RssManager.DesktopApp.Models.SignInModel();
             m.Auth("demo", "demo");
         }
     }
