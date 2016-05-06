@@ -1,4 +1,6 @@
-﻿using RssManager.DesktopApp.Dialogs.DialogFacade;
+﻿#define MYDEBUG
+
+using RssManager.DesktopApp.Dialogs.DialogFacade;
 using RssManager.Interfaces.DTO;
 using RssManager.Objects.BO;
 using System;
@@ -79,6 +81,10 @@ namespace RssManager.DesktopApp.Dialogs.DialogSignIn
         public DialogSignInViewModel(string message)
             : base(message)
         {
+#if(MYDEBUG)
+            this.username = "demo";
+            this.password = "demo";
+#endif
             this.model = new Models.SignInModel();
             this.keyDownCommand = new RelayCommand(OnGotFocus);
             this.closeCommand = new RelayCommand(OnClose);

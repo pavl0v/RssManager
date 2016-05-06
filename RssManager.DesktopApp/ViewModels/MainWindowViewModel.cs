@@ -5,6 +5,7 @@ using RssManager.Interfaces.DTO;
 using RssManager.Objects.BO;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -15,29 +16,64 @@ using System.Windows.Input;
 
 namespace RssManager.DesktopApp.ViewModels
 {
-    public class MainWindowViewModel
+    public class MainWindowViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private IDialogFacade dialogFacade = null;
         private IServiceFacade serviceFacade = null;
 
-        private ICommand cmd = null;
-        public ICommand Cmd
+        private List<RssChannelDTO> channels = null;
+        public List<RssChannelDTO> Channels
         {
-            get { return this.cmd; }
-            set { this.cmd = value; }
+            get { return this.channels; }
+            set { this.channels = value; }
+        }
+
+        private ICommand loadedCommand = null;
+        public ICommand LoadedCommand
+        {
+            get { return this.loadedCommand; }
+            set { this.loadedCommand = value; }
+        }
+
+        private ICommand channelsReloadCommand = null;
+        public ICommand ChannelsReloadCommand
+        {
+            get { return this.channelsReloadCommand; }
+            set { this.channelsReloadCommand = value; }
         }
 
         public MainWindowViewModel(IDialogFacade dialogFacade, IServiceFacade serviceFacade)
         {
             this.dialogFacade = dialogFacade;
             this.serviceFacade = serviceFacade;
-            this.cmd = new RelayCommand(OnCmd);
+            this.loadedCommand = new RelayCommand(OnLoaded);
+            this.channelsReloadCommand = new RelayCommand(OnChannelsReload);
         }
 
-        private void OnCmd(object parameter)
+        private void OnLoaded(object parameter)
         {
-            //this.dialogFacade.ShowDialogOk("Test message", new DialogWindowProperties() { Owner = parameter as Window });
-            List<RssChannelDTO> s = this.serviceFacade.ServiceChannels.GetChannels();
+            this.LoadChannels();
+        }
+
+        private void OnChannelsReload(object parameter)
+        {
+            if(this.channels != null)
+                this.channels.Clear();
+            this.LoadChannels();
+        }
+
+        private async void LoadChannels()
+        {
+            this.channels = await this.serviceFacade.ServiceChannels.GetChannelsAsync();
+            this.OnPropertyChanged("Channels");
+        }
+
+        private void OnPropertyChanged(string propertName)
+        {
+            if (this.PropertyChanged != null)
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propertName));
         }
     }
 }

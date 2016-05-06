@@ -26,5 +26,10 @@ namespace RssManager.DesktopApp.Services
 
             return channels;
         }
+
+        public async Task<List<RssChannelDTO>> GetChannelsAsync()
+        {
+            return await Task.Factory.StartNew<List<RssChannelDTO>>(GetChannels);
+        }
     }
 }
