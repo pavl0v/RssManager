@@ -24,18 +24,28 @@
             </MenuItem>
             <MenuItem Header="?"></MenuItem>
         </Menu>
-        <!--<Button Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75"
-                Command="{Binding Cmd}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>-->
-        <ListBox Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Channels}">
+        <ListBox Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Channels}" HorizontalContentAlignment="Stretch">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Name}"></TextBlock>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding Name}"></TextBlock>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDown">
+                                <i:InvokeCommandAction Command="{Binding Path=DataContext.ChannelSelectedCommand, RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}"
+                                                       CommandParameter="{Binding Id}">
+                                </i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <GridSplitter Grid.Column="1" Grid.RowSpan="3" Width="2" VerticalAlignment="Stretch"  HorizontalAlignment="Center" />
         <ListBox Grid.Column="2" Grid.Row="1"></ListBox>
-        <StatusBar Grid.Row="2" Grid.ColumnSpan="3" Height="18" />
+        <StatusBar Grid.Row="2" Grid.ColumnSpan="3" Height="18"></StatusBar>
     </Grid>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">

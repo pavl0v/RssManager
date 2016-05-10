@@ -51,12 +51,20 @@ namespace RssManager.DesktopApp.ViewModels
             set { this.channelsReloadCommand = value; }
         }
 
+        private ICommand channelSelectedCommand = null;
+        public ICommand ChannelSelectedCommand
+        {
+            get { return this.channelSelectedCommand; }
+            set { this.channelSelectedCommand = value; }
+        }
+
         public MainWindowViewModel(IDialogFacade dialogFacade, IServiceFacade serviceFacade)
         {
             this.dialogFacade = dialogFacade;
             this.serviceFacade = serviceFacade;
             this.loadedCommand = new RelayCommand(OnLoaded);
             this.exitCommand = new RelayCommand(OnExit);
+            this.channelSelectedCommand = new RelayCommand(OnChannelSelected);
             this.channelsReloadCommand = new RelayCommand(OnChannelsReload);
         }
 
@@ -70,6 +78,11 @@ namespace RssManager.DesktopApp.ViewModels
             Window win = parameter as Window;
             if (win != null)
                 win.Close();
+        }
+
+        private void OnChannelSelected(object parameter)
+        {
+            this.dialogFacade.ShowDialogOk(parameter.ToString(), new DialogWindowProperties());
         }
 
         private void OnChannelsReload(object parameter)
