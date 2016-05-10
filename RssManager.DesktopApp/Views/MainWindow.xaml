@@ -19,7 +19,8 @@
             <MenuItem Header="File">
                 <MenuItem Header="Reload" Command="{Binding ChannelsReloadCommand}"></MenuItem>
                 <Separator></Separator>
-                <MenuItem Header="Exit"></MenuItem>
+                <MenuItem Header="Exit" Command="{Binding ExitCommand}" 
+                          CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}"></MenuItem>
             </MenuItem>
             <MenuItem Header="?"></MenuItem>
         </Menu>
