@@ -44,7 +44,18 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <GridSplitter Grid.Column="1" Grid.RowSpan="3" Width="2" VerticalAlignment="Stretch"  HorizontalAlignment="Center" />
-        <ListBox Grid.Column="2" Grid.Row="1"></ListBox>
+        <ListBox Grid.Column="2" Grid.Row="1" ItemsSource="{Binding Items}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="{Binding PubDateTimeFormatted}"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <StatusBar Grid.Row="2" Grid.ColumnSpan="3" Height="18"></StatusBar>
     </Grid>
     <i:Interaction.Triggers>

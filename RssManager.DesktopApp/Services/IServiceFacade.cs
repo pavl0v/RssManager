@@ -9,5 +9,6 @@ namespace RssManager.DesktopApp.Services
     public interface IServiceFacade
     {
         IServiceChannels ServiceChannels { get; }
+        IServiceItems ServiceItems { get; }
     }
 }

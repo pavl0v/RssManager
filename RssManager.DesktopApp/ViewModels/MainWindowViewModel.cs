@@ -5,6 +5,7 @@ using RssManager.Interfaces.DTO;
 using RssManager.Objects.BO;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -28,6 +29,13 @@ namespace RssManager.DesktopApp.ViewModels
         {
             get { return this.channels; }
             set { this.channels = value; }
+        }
+
+        private ObservableCollection<RssItemDTO> items = new ObservableCollection<RssItemDTO>();
+        public ObservableCollection<RssItemDTO> Items
+        {
+            get { return this.items; }
+            set { this.items = value; }
         }
 
         private ICommand loadedCommand = null;
@@ -82,7 +90,12 @@ namespace RssManager.DesktopApp.ViewModels
 
         private void OnChannelSelected(object parameter)
         {
-            this.dialogFacade.ShowDialogOk(parameter.ToString(), new DialogWindowProperties());
+            //this.dialogFacade.ShowDialogOk(parameter.ToString(), new DialogWindowProperties());
+            long channelId = Convert.ToInt64(parameter);
+            List<RssItemDTO> items = this.serviceFacade.ServiceItems.GetItems(channelId, 1, 20);
+            this.Items.Clear();
+            foreach (RssItemDTO item in items)
+                this.Items.Add(item);
         }
 
         private void OnChannelsReload(object parameter)
