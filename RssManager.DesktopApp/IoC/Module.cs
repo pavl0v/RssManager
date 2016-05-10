@@ -17,6 +17,7 @@ namespace RssManager.DesktopApp.IoC
             Bind<IDialogFacade>().To<DialogFacade>().InSingletonScope();
             Bind<IRequestApi>().To<RequestApi>().InSingletonScope();
             Bind<IServiceChannels>().To<ServiceChannels>().InSingletonScope();
+            Bind<IServiceItems>().To<ServiceItems>().InSingletonScope();
             Bind<IServiceFacade>().To<ServiceFacade>().InSingletonScope();
             Bind<MainWindowViewModel>().ToSelf();
         }

@@ -13,5 +13,10 @@ namespace RssManager.DesktopApp.Services
         {
             get { return IoC.Container.Instance.Kernel.Get<IServiceChannels>(); }
         }
+
+        public IServiceItems ServiceItems
+        {
+            get { return IoC.Container.Instance.Kernel.Get<IServiceItems>(); }
+        }
     }
 }

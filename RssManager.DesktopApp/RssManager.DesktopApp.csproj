@@ -96,9 +96,11 @@
     <Compile Include="Services\IRequestApi.cs" />
     <Compile Include="Services\IServiceChannels.cs" />
     <Compile Include="Services\IServiceFacade.cs" />
+    <Compile Include="Services\IServiceItems.cs" />
     <Compile Include="Services\RequestApi.cs" />
     <Compile Include="Services\ServiceChannels.cs" />
     <Compile Include="Services\ServiceFacade.cs" />
+    <Compile Include="Services\ServiceItems.cs" />
     <Compile Include="TaskCompleteEventArgs.cs" />
     <Compile Include="TaskCompleteStateEnum.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
