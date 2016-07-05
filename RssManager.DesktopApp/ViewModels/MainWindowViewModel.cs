@@ -23,12 +23,57 @@ namespace RssManager.DesktopApp.ViewModels
 
         private IDialogFacade dialogFacade = null;
         private IServiceFacade serviceFacade = null;
+        private int currentPageNo = 0;
+        private long currentChannelId = 0;
+        
 
         private List<RssChannelDTO> channels = null;
         public List<RssChannelDTO> Channels
         {
             get { return this.channels; }
             set { this.channels = value; }
+        }
+
+        private bool pageLoaded = false;
+        public bool PageLoaded
+        {
+            get { return this.pageLoaded; }
+            set 
+            {
+                if (this.pageLoaded != value)
+                {
+                    this.pageLoaded = value;
+                    this.OnPropertyChanged("PageLoaded");
+                }
+            }
+        }
+
+        private bool allPagesLoaded = false;
+        public bool AllPagesLoaded
+        {
+            get { return this.allPagesLoaded; }
+            set
+            {
+                if (this.allPagesLoaded != value)
+                {
+                    this.allPagesLoaded = value;
+                    this.OnPropertyChanged("AllPagesLoaded");
+                }
+            }
+        }
+
+        private bool isScrollBarVisible = false;
+        public bool IsScrollBarVisible
+        {
+            get { return this.isScrollBarVisible; }
+            set
+            {
+                if (this.isScrollBarVisible != value)
+                {
+                    this.isScrollBarVisible = value;
+                    //this.OnPropertyChanged("IsScrollBarVisible");
+                }
+            }
         }
 
         private ObservableCollection<RssItemDTO> items = new ObservableCollection<RssItemDTO>();
@@ -66,6 +111,20 @@ namespace RssManager.DesktopApp.ViewModels
             set { this.channelSelectedCommand = value; }
         }
 
+        private ICommand scrollDownCommand = null;
+        public ICommand ScrollDownCommand
+        {
+            get { return this.scrollDownCommand; }
+            set { this.scrollDownCommand = value; }
+        }
+
+        private ICommand scrollBarVisibleCommand = null;
+        public ICommand ScrollBarVisibleCommand
+        {
+            get { return this.scrollBarVisibleCommand; }
+            set { this.scrollBarVisibleCommand = value; }
+        }
+
         public MainWindowViewModel(IDialogFacade dialogFacade, IServiceFacade serviceFacade)
         {
             this.dialogFacade = dialogFacade;
@@ -74,6 +133,8 @@ namespace RssManager.DesktopApp.ViewModels
             this.exitCommand = new RelayCommand(OnExit);
             this.channelSelectedCommand = new RelayCommand(OnChannelSelected);
             this.channelsReloadCommand = new RelayCommand(OnChannelsReload);
+            this.scrollDownCommand = new RelayCommand(OnScrollDown);
+            this.scrollBarVisibleCommand = new RelayCommand(OnScrollBarVisible);
         }
 
         private void OnLoaded(object parameter)
@@ -91,17 +152,50 @@ namespace RssManager.DesktopApp.ViewModels
         private void OnChannelSelected(object parameter)
         {
             //this.dialogFacade.ShowDialogOk(parameter.ToString(), new DialogWindowProperties());
-            long channelId = Convert.ToInt64(parameter);
-            List<RssItemDTO> items = this.serviceFacade.ServiceItems.GetItems(channelId, 1, 20);
+            this.currentPageNo = 0;
+            this.AllPagesLoaded = false;
+            this.currentChannelId = Convert.ToInt64(parameter);
             this.Items.Clear();
+            this.PageLoaded = false;
+            //while (!this.isScrollBarVisible)
+            {
+                this.LoadNextPage();
+            }
+        }
+
+        private void LoadNextPage()
+        {
+            this.PageLoaded = false;
+            this.currentPageNo++;
+            List<RssItemDTO> items = this.serviceFacade.ServiceItems.GetItems(this.currentChannelId, this.currentPageNo, 20);
+            if (items == null || items.Count == 0)
+                this.AllPagesLoaded = true;
             foreach (RssItemDTO item in items)
                 this.Items.Add(item);
+            this.PageLoaded = true;
+        }
+
+        private void OnScrollDown(object parameter)
+        {
+            //Window win = parameter as Window;
+            //this.dialogFacade.ShowDialogOk("SCROLL", new DialogWindowProperties() { Owner = win });
+            if (!this.AllPagesLoaded)
+            {
+                this.LoadNextPage();
+            }
+        }
+
+        private void OnScrollBarVisible(object parameter)
+        {
+            this.PageLoaded = false;
         }
 
         private void OnChannelsReload(object parameter)
         {
             if(this.channels != null)
                 this.channels.Clear();
+            if (this.items != null)
+                this.items.Clear();
             this.LoadChannels();
         }
 

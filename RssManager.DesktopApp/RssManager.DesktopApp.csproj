@@ -72,6 +72,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Behaviour.cs" />
     <Compile Include="Dialogs\DialogFacade\DialogFacade.cs" />
     <Compile Include="Dialogs\DialogFacade\DialogViewModelBase.cs" />
     <Compile Include="Dialogs\DialogFacade\DialogWindow.xaml.cs">
